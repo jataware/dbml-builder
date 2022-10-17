@@ -5,6 +5,10 @@ description = ""
 authors = ["Five Grant <five@jataware.com>"]
 readme = "README.md"
 packages = [{include = "dbml_builder"}]
+repository = "https://github.com/jataware/dbml-builder"
+
+[tool.poetry.urls]
+"Bug Tracker" = "https://github.com/jataware/dbml-builder/issues"
 
 [tool.poetry.dependencies]
 click = "^8.1"
