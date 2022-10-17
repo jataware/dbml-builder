@@ -1,11 +1,12 @@
 [tool.poetry]
 name = "dbml-builder"
-version = "0.1.0"
+version = "0.1.4"
 description = ""
 authors = ["Five Grant <five@jataware.com>"]
 readme = "README.md"
 packages = [{include = "dbml_builder"}]
-repository = "https://github.com/jataware/dbml-builder"
+license = "MIT"
+keywords = ["dbml", "sql"]
 
 [tool.poetry.urls]
 "Bug Tracker" = "https://github.com/jataware/dbml-builder/issues"

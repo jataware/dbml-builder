@@ -4,7 +4,7 @@ cli.py - This script wraps the packages functionality in a CLI interface
 
 from click import argument, echo, group
 
-from build import generate_validation, verify
+from dbml_builder.build import generate_models, verify
 
 @group()
 def main() -> None:
@@ -36,7 +36,7 @@ def generate(path_to_dbml: str, path_to_generated_dir: str) -> None:
 
     `gen` should only be called when developing using a new version of the DBML.
     """
-    generate_validation(path_to_dbml, path_to_generated_dir)
+    generate_models(path_to_dbml, path_to_generated_dir)
     echo('Generated pydantic schemas')
 
 

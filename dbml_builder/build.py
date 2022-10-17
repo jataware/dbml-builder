@@ -14,7 +14,7 @@ from os import makedirs
 from os.path import exists, join
 from pathlib import Path
 
-from fix import patch
+from dbml_builder.fix import patch
 
 INFO = 'info.json'
 SCHEMAS = 'schema.py'
@@ -54,7 +54,7 @@ def verify(version: str, generated_dir: str) -> bool:
         return False
  
 
-def generate_validation(dbml_path: str, generated_dir: str) -> None:
+def generate_models(dbml_path: str, generated_dir: str) -> None:
     """
     Generate model code from DBML
 
