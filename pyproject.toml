@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "model-build"
+name = "dbml-builder"
 version = "0.1.0"
 description = ""
 authors = ["Five Grant <five@jataware.com>"]
