@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "model-build"
+version = "0.1.0"
+description = ""
+authors = ["Five Grant <five@jataware.com>"]
+readme = "README.md"
+packages = [{include = "dbml_builder"}]
+
+[tool.poetry.dependencies]
+click = "^8.1"
+python = "^3.10"
+pydantic = "1.10.2"
+pydbml = "1.0.3"
+omymodels = "0.12.1"
+SQLAlchemy = "1.4.41"
+funcy = "^1.17"
+
+[tool.poetry.scripts]
+model-build = "dbml_builder.cli:main"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
