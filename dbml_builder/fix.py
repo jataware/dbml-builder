@@ -10,7 +10,7 @@ fix.py - The generation of the ORMs and schemas relies on two libraries 'PyDBML'
          Hopefully, patches will be submitted upstream so this module can be dropped.
          Upstream PRs and fixes will also be provided in the comment below.
 """
-from funcy import compose
+from funcy import compose, identity
 
 """
 Issue: All of the fields in the Enum end with a comma when rendering DDL with
@@ -20,10 +20,10 @@ Issue: All of the fields in the Enum end with a comma when rendering DDL with
 patch_trailing_commas = lambda text: text.replace(',\n)', '\n)')
 
 """
-Issue: The final models generate models with a `blob` type instead of a `str` type.
-       This obviously throws an error because `blob`s are not a valid type in Python.
+Issue: The final models generate models with a `blob` type instead of a `sa.LargeBinary` or `bytes` type.
 """
-patch_nomenclature = lambda text: text.replace('blob', 'varchar')
+patch_blob_for_schema = lambda text: text.replace('blob', 'bytes')
+patch_blob_for_orm = lambda text: text.replace('blob', 'sa.LargeBinary')
 
 """
 Issue: When a default value is set to null, the model creation defaults to `NULL` which
@@ -31,9 +31,33 @@ Issue: When a default value is set to null, the model creation defaults to `NULL
 """
 patch_uppercase = lambda text: text.replace('NULL', 'null')
 
+"""
+Enhancement: Pydantic models don't make the primary keys optional which is makes it difficult to create
+             new models in the API.
+"""
+make_ids_optional = lambda text: text.replace('id: int', 'id: Optional[int] = None')
 
-patch = compose(
+### Bundle patches ###
+
+"""
+Patch DDL string before processing by O! My Models
+"""
+patch_ddl = compose(
     patch_trailing_commas, 
-    patch_nomenclature, 
-    patch_uppercase
+)
+
+"""
+Patch generated Pydantic code
+"""
+patch_schema = compose(
+    patch_blob_for_schema, 
+    patch_uppercase,
+    make_ids_optional
+)
+
+"""
+Patch generated ORM code
+"""
+patch_orm = compose(
+    patch_blob_for_orm
 )
