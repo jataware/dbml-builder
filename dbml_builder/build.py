@@ -65,6 +65,7 @@ def generate_models(dbml_path: str, generated_dir: str) -> None:
       2. A file with Sqlalchemy tables corresponding to the contents of the DBML.
     """
     makedirs(generated_dir, exist_ok=True)
+    Path(join(generated_dir, '__init__.py')).touch()
 
     dbml = PyDBML(Path(dbml_path))
     ddl = patch_ddl(dbml.sql)
