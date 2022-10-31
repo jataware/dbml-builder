@@ -21,11 +21,11 @@ def check(version: str, path_to_generated_dir: str) -> None:
     """
     Verify if model code matches current DBML version
     """
-    try:
-        assert verify(version, path_to_generated_dir)
+    is_success, message = verify(version, path_to_generated_dir)
+    if is_success:
         echo('Version match! Generated model code is up to date.')
-    except AssertionError:
-        echo('Version mismatch! DBML has either been updated or generated schemas have been modified by users!')
+    else:
+        echo(f'Verification failed because {message}.')
         
 @main.command()
 @argument('path_to_dbml', nargs=1)
