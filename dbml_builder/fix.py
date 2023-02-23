@@ -37,6 +37,13 @@ Enhancement: Pydantic models don't make the primary keys optional which is makes
 """
 make_ids_optional = lambda text: text.replace('id: int', 'id: Optional[int] = None')
 
+"""
+Issue: The source of truth for time should be the SQL database. Pydantic defaults to `datetime.now()` which
+       allows system time on the api to leak in.     
+"""
+ignore_time = lambda text: text.replace(': datetime.datetime = datetime.datetime.now()', ': Optional[datetime.datetime] = None')
+    
+
 ### Bundle patches ###
 
 """
@@ -52,12 +59,13 @@ Patch generated Pydantic code
 patch_schema = compose(
     patch_blob_for_schema, 
     patch_uppercase,
-    make_ids_optional
+    make_ids_optional,
+    ignore_time,
 )
 
 """
 Patch generated ORM code
 """
 patch_orm = compose(
-    patch_blob_for_orm
+    patch_blob_for_orm,
 )
