@@ -37,6 +37,12 @@ Enhancement: Pydantic models don't make the primary keys optional which is makes
 """
 make_ids_optional = lambda text: text.replace('id: int', 'id: Optional[int] = None')
 
+"""
+Issue: Pydantic defaults to `datetime.now()` which isn't in utc.     
+"""
+to_utc = lambda text: text.replace('.now', '.utcnow')
+ignore_time = lambda text: text.replace(', server_default=func.now()', ', server_default=None')   
+
 ### Bundle patches ###
 
 """
