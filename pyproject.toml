@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "dbml-builder"
-version = "0.4.1"
+version = "0.4.2"
 description = "Builds usable models from DBML"
 authors = ["Five Grant <five@jataware.com>"]
 readme = "README.md"
