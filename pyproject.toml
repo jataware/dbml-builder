@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "dbml-builder"
-version = "0.4.1"
+version = "0.4.2"
 description = "Builds usable models from DBML"
 authors = ["Five Grant <five@jataware.com>"]
 readme = "README.md"
@@ -15,8 +15,8 @@ keywords = ["dbml", "sql"]
 click = "^8.1"
 python = "^3.10"
 pydantic = "^1.10.2"
-pydbml = "^1.0.3"
-omymodels = "^0.12.1"
+pydbml = "^1.0.9"
+omymodels = "^0.14.0"
 SQLAlchemy = "^1.4.41"
 funcy = "^1.17"
 
